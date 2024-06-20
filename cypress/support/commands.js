@@ -23,3 +23,15 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', (username, password) =>
+    {
+        cy.session([username,password], () => {
+            cy.visit('https://www.fr.digital-report.net:8443/en/admin/login');
+            cy.get('#inputEmail').type(username);
+            cy.get('#inputPassword').type(password);
+            cy.get('.btn').click();
+
+        });
+   
+});

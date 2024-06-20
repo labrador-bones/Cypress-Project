@@ -10,10 +10,7 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 describe('Adding a Client', function () {
 
     beforeEach(() => {
-        cy.visit('https://www.fr.digital-report.net:8443/en/admin/login');
-        cy.get('#inputEmail').type('bacani.c@labrador-company.com');
-        cy.get('#inputPassword').type('Chichay.13');
-        cy.get('.btn').click();
+      cy.login('bacani.c@labrador-company.com', 'Chichay.13')
     })
     // client user
     it('Create Client User', function () {
@@ -183,4 +180,5 @@ describe('Adding a Client', function () {
       }); // Runs after each test in the block
 
 
+      
 })
