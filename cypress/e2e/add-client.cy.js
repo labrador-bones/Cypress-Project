@@ -10,7 +10,9 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 describe('Adding a Client', function () {
 
     beforeEach(() => {
-      cy.login('bacani.c@labrador-company.com', 'Chichay.13')
+      cy.login('bacani.c@labrador-company.com', 'Chichay.13');
+      cy.visit('https://www.fr.digital-report.net:8443/en/admin/customers/');
+      cy.get('h1').should('have.text', 'Customers');
     })
     // client user
     it('Create Client User', function () {
