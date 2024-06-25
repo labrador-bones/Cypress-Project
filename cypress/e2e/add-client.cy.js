@@ -9,11 +9,11 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 
 describe('Adding a Client', function () {
 
-    beforeEach(() => {
-      cy.login('bacani.c@labrador-company.com', 'Chichay.13');
-      cy.visit('https://www.fr.digital-report.net:8443/en/admin/customers/');
-      cy.get('h1').should('have.text', 'Customers');
-    })
+beforeEach(() => {
+    cy.login('bacani.c@labrador-company.com', 'Chichay.0713');
+});
+
+
     // client user
     it('Create Client User', function () {
         cy.visit('https://www.fr.digital-report.net:8443/en/admin/users/');
@@ -120,7 +120,7 @@ describe('Adding a Client', function () {
         }); //validate the you are in the user list
         cy.get('.card-body').should('contain', 'test@labrador.com') //validate the name of the new user in the list
         //validate if there is an email 
-
+        cy.get('.switch-custom').should('not.have.been.called')
         cy.pause();
     });
 
@@ -166,7 +166,7 @@ describe('Adding a Client', function () {
         cy.get('.col-12 > div > .select2 > .selection > .select2-selection').click(); //customer list
         cy.get('#select2-user_add_customers-results').click();
         cy.get('#user_add_customers').select(['3'], { force: true }); 
-        cy.get('.switch-custom').click(); //client account toggle button
+        // cy.get('.switch-custom').click(); //client account toggle button 
         cy.wait(1000);
         cy.get('.btn-primary').click(); //save button
         cy.location().should((loc) => {
