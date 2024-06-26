@@ -32,7 +32,6 @@ Cypress.Commands.add('login', (username) =>
             cy.pause(InputEvent)
             // cy.get('#inputPassword').type(password);
             cy.get('.btn').click();
-            
             cy.get('h1').should('have.text', 'Customers');
 
         });
