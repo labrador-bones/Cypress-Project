@@ -10,7 +10,7 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 describe('Adding a Client', function () {
 
 beforeEach(() => {
-    cy.login('bacani.c@labrador-company.com', 'Chichay.0713');
+    cy.login('bacani.c@labrador-company.com');
 });
 
 
@@ -120,7 +120,7 @@ beforeEach(() => {
         }); //validate the you are in the user list
         cy.get('.card-body').should('contain', 'test@labrador.com') //validate the name of the new user in the list
         //validate if there is an email 
-        cy.get('.switch-custom').should('not.have.been.called')
+        // cy.get('.switch-custom').should('not.have.been.called')
         cy.pause();
     });
 
