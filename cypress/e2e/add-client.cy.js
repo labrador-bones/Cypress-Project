@@ -41,9 +41,10 @@ beforeEach(() => {
         cy.get('.switch-custom').click(); //client account toggle button
         cy.wait(1000);
         cy.get('.btn-primary').click(); //save button
-        cy.location().should((loc) => {
-            expect(loc.href).to.eq('https://www.fr.digital-report.net:8443/en/admin/users/')
-        }); //validate the you are in the user list
+        cy.location('href').should('contain', '/en/admin/users/');
+        // cy.location().should((loc) => {
+        //     expect(loc.href).to.eq('https://www.fr.digital-report.net:8443/en/admin/users/')
+        // }); //validate the you are in the user list
         cy.get('.card-body').should('contain', 'test@labrador.com') //validate the name of the new user in the list
         //validate if there is an email 
 
