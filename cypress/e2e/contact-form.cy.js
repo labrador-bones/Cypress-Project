@@ -17,8 +17,9 @@ describe('Adding a Client', function () {
         cy.location().should((loc) => {
             expect(loc.pathname).to.eq('/en/admin/reports/')
         });
-        cy.get('[href="//atos-test-pascal-2023.fr.digital-report.net:8443?securityKey=528be0151b318e2062e692aef906174c"]').invoke('removeAttr', 'target').click();
-        cy.url().should('include', 'https://atos-test-pascal-2023.fr.digital-report.net:8443/?securityKey=528be0151b318e2062e692aef906174c');
+        cy.get('#filter-name').type('PasCall Test{enter}');
+        cy.get('[href="//pas.fr.digital-report.net:8443?securityKey=cb0b2efa815d59d95343ec5b0be716a6"]').invoke('removeAttr', 'target').click();
+        cy.url().should('include', 'https://pas.fr.digital-report.net:8443/en/');
         cy.get('#support-btn').click();
         cy.get('#form_submission_email').type('test@me.com');
         cy.get('#form_submission_lastname').type('Khalifa');
@@ -27,7 +28,7 @@ describe('Adding a Client', function () {
         cy.get('#form_submission_message').type('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
         cy.get('.rgpd > .form-check > .form-check-label').click();
         cy.get('#form_submission_submit').click();
-        cy.get('#support-confirmation-popin > .panel-wrap > .panel-content > .panel-title > .title').should('have.text', 'Mail envoyé');
+        cy.get('#support-confirmation-popin > .panel-wrap > .panel-content > .panel-title > .title').should('have.text', 'Mail sent');
 
     });
 
@@ -37,8 +38,9 @@ describe('Adding a Client', function () {
         cy.location().should((loc) => {
             expect(loc.pathname).to.eq('/en/admin/reports/')
         });
-        cy.get('[href="//atos-test-pascal-2023.fr.digital-report.net:8443?securityKey=528be0151b318e2062e692aef906174c"]').invoke('removeAttr', 'target').click();
-        cy.url().should('include', 'https://atos-test-pascal-2023.fr.digital-report.net:8443/?securityKey=528be0151b318e2062e692aef906174c');
+        cy.get('#filter-name').type('PasCall Test{enter}');
+        cy.get('[href="//pas.fr.digital-report.net:8443?securityKey=cb0b2efa815d59d95343ec5b0be716a6"]').invoke('removeAttr', 'target').click();
+        cy.url().should('include', 'https://pas.fr.digital-report.net:8443/en/');
         cy.get('#support-btn').click();
         // cy.get('#form_submission_email').type('test@me.com');
         cy.get('#form_submission_lastname').type('test');
@@ -59,8 +61,9 @@ describe('Adding a Client', function () {
         cy.location().should((loc) => {
             expect(loc.pathname).to.eq('/en/admin/reports/')
         });
-        cy.get('[href="//atos-test-pascal-2023.fr.digital-report.net:8443?securityKey=528be0151b318e2062e692aef906174c"]').invoke('removeAttr', 'target').click();
-        cy.url().should('include', 'https://atos-test-pascal-2023.fr.digital-report.net:8443/?securityKey=528be0151b318e2062e692aef906174c');
+        cy.get('#filter-name').type('PasCall Test{enter}');
+        cy.get('[href="//pas.fr.digital-report.net:8443?securityKey=cb0b2efa815d59d95343ec5b0be716a6"]').invoke('removeAttr', 'target').click();
+        cy.url().should('include', 'https://pas.fr.digital-report.net:8443/en/');
         cy.get('#support-btn').click();
         cy.get('#form_submission_email').type('test@me.com');
         cy.get('#form_submission_lastname').type('test');
@@ -73,5 +76,44 @@ describe('Adding a Client', function () {
         
     });
 
-    
+    it('Clear session in this block', () => {
+        // Clear cookies, local storage, and session storage
+        // cy.clearCookies();
+        // cy.clearLocalStorage();
+        // cy.window().then((win) => {
+        //   win.sessionStorage.clear();
+        // });
+        cy.visit('https://www.fr.digital-report.net:8443/en/admin/customers/');
+        // cy.get('#inputEmail').type('bacani.c@labrador-company.com')
+        // cy.get('#inputPassword').type('Chichay.0713')
+        // // cy.pause(InputEvent)
+        // cy.get('.btn').click()
+        cy.get(':nth-child(4) > .menu-link > .menu-icon').click();
+        cy.location().should((loc) => {
+            expect(loc.pathname).to.eq('/en/admin/reports/')
+        });
+        cy.get('#filter-name').type('PasCall Test{enter}');
+        cy.get('[href="//pas.fr.digital-report.net:8443?securityKey=cb0b2efa815d59d95343ec5b0be716a6"]').invoke('removeAttr', 'target').click();
+        cy.url().should('include', 'https://pas.fr.digital-report.net:8443/en/');
+       
+        cy.clearCookies();
+        cy.clearLocalStorage();
+        cy.window().then((win) => {
+          win.sessionStorage.clear();
+        });
+
+        cy.visit('https://pas.fr.digital-report.net:8443?securityKey=cb0b2efa815d59d95343ec5b0be716a6');
+        cy.get('.login-btn-wrap > #login-btn').click();
+        cy.get('#inputEmail').type('bacani.c@labrador-company.com');
+        cy.get('#inputPassword').type('Chichay.0713');
+        cy.get('.loggin-actions-container > .btn[type="submit"]').click();
+        // cy.get('#form-login-front').submit();
+        cy.contains('Christian Bernard Bacani').should('be.visible');
+        cy.get('#support-btn').click();
+        cy.get('#form_submission_message').type('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
+        cy.get('.form-check > .form-check-label').click();
+        cy.get('#form_submission_submit').click();
+        cy.get('#support-confirmation-popin > .panel-wrap > .panel-content > .panel-title > .title').should('have.text', 'Mail sent');
+        cy.get('#support-confirmation-popin > .top-bar > .btn').click();
+    });
 });
