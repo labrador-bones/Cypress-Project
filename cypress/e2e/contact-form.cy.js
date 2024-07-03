@@ -79,7 +79,7 @@ describe('Contact Form', function () {
         cy.pause();
     });
 
-    it('Clear session in this block / create form with client account', () => {
+    it('Clear session in this block / create form with connected client', () => {
         // Clear cookies, local storage, and session storage
         // cy.clearCookies();
         // cy.clearLocalStorage();
@@ -88,7 +88,6 @@ describe('Contact Form', function () {
         // });
         cy.visit('https://www.fr.digital-report.net:8443/en/admin/customers/');
         // cy.get('#inputEmail').type('bacani.c@labrador-company.com')
-        // cy.get('#inputPassword').type('Chichay.0713')
         // // cy.pause(InputEvent)
         // cy.get('.btn').click()
         cy.get(':nth-child(4) > .menu-link > .menu-icon').click();
@@ -108,7 +107,7 @@ describe('Contact Form', function () {
         cy.visit('https://pas.fr.digital-report.net:8443?securityKey=cb0b2efa815d59d95343ec5b0be716a6');
         cy.get('.login-btn-wrap > #login-btn').click();
         cy.get('#inputEmail').type('bacani.c@labrador-company.com');
-        cy.get('#inputPassword').type('Chichay.0713');
+        cy.pause(InputEvent);
         cy.get('.loggin-actions-container > .btn[type="submit"]').click();
         cy.contains('Christian Bernard Bacani').should('be.visible');
         cy.get('#support-btn').click();
@@ -118,7 +117,9 @@ describe('Contact Form', function () {
         cy.get('#support-confirmation-popin > .panel-wrap > .panel-content > .panel-title > .title').should('have.text', 'Mail sent');
         cy.pause();
         cy.get('#support-confirmation-popin > .top-bar > .btn').click();
-   
-        
-    });
+   });
+
+   afterEach(() => {
+        cy.log('Test finished');
+      });
 });
